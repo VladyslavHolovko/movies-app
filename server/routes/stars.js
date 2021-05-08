@@ -1,0 +1,13 @@
+const express = require('express');
+
+const router = express.Router();
+
+const Movie = require('../models/Movie');
+
+router.get('/', (req, res) => {
+    Movie.find().distinct('stars')
+        .then(movies => res.send(movies))
+        .catch(err => res.send(err));
+});
+
+module.exports = router;
