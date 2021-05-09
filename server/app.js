@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const app = express();
 
 //MongoDB connection
-mongoose.connect('mongodb+srv://movie-admin:multiplex@cluster0.yrlfk.mongodb.net/moviesDB?retryWrites=true&w=majority', {
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
