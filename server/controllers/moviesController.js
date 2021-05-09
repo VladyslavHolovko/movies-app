@@ -23,11 +23,17 @@ exports.movies_list_get = (req, res) => {
 exports.movies_create_post = (req, res) => {
     Movie.create(req.body)
         .then(movie => res.send(movie))
-        .catch(err => res.send(err));
+        .catch(err => res.status(400).send(err.message));
 };
 
 exports.movies_one_delete = (req, res) => {
-    Movie.remove({ _id: req.params.movieId })
-        .then(movie => res.send(movie))
+    Movie.deleteOne({ _id: req.params.movieId })
+        .then(dbRes => {
+            if (dbRes.deletedCount) {
+                res.send('Movie was successfully deleted');
+            } else {
+                res.status(404).send('Movie was not found');
+            }
+        })
         .catch(err => res.send(err));
 };
