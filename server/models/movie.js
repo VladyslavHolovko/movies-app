@@ -11,6 +11,7 @@ const MovieSchema = new mongoose.Schema({
     },
     format: {
         type: String,
+        enum: ['VHS', 'DVD', 'Blu-Ray'],
         required: true
     },
     stars: {
