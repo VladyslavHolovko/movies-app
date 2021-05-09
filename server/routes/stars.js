@@ -2,12 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const Movie = require('../models/Movie');
+const stars_controller = require('../controllers/starsController');
 
-router.get('/', (req, res) => {
-    Movie.find().distinct('stars')
-        .then(movies => res.send(movies))
-        .catch(err => res.send(err));
-});
+router.get('/', stars_controller.stars_list_get);
 
 module.exports = router;

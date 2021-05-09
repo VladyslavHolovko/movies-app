@@ -2,38 +2,12 @@ const express = require('express');
 
 const router = express.Router();
 
-const Movie = require('../models/Movie');
+const movies_controller = require('../controllers/moviesController');
 
-router.get('/', (req, res) => {
-    let query;
+router.get('/', movies_controller.movies_list_get);
 
-    if (req.query) {
-        query = {};
+router.post('/', movies_controller.movies_create_post);
 
-        if (req.query.title) {
-            query.title = new RegExp(req.query.title, 'gi');
-        }
-
-        if (req.query.stars) {
-            query.stars = new RegExp(req.query.stars, 'gi');
-        }
-    }
-
-    Movie.find(query).sort('title')
-        .then(movies => res.send(movies))
-        .catch(err => res.send(err));
-});
-
-router.post('/',(req, res) => {
-    Movie.create(req.body)
-        .then(movie => res.send(movie))
-        .catch(err => res.send(err));
-});
-
-router.delete('/:movieId', (req, res) => {
-    Movie.remove({ _id: req.params.movieId })
-        .then(movie => res.send(movie))
-        .catch(err => res.send(err));
-})
+router.delete('/:movieId', movies_controller.movies_one_delete);
 
 module.exports = router;
