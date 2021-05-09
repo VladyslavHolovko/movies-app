@@ -14,6 +14,9 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(() => console.log('MongoDB connection failed'));
 
 //Middlewares
+const cors = require('cors');
+
+app.use(cors());
 app.use(express.json());
 
 //Routes
