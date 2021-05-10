@@ -3,13 +3,10 @@ import React, { useContext } from 'react';
 import Paper from "@material-ui/core/Paper";
 import FilterByStar from "../FilterByStar";
 import FilterByTitle from "../FilterByTitle";
-import useStarsList from "../../hooks/useStarsList";
 import AppContext from "../../context/appContext";
 
 const FiltersContainer = () => {
-    const { activeFilters, onFilterChange } = useContext(AppContext);
-
-    const [stars] = useStarsList();
+    const { activeFilters, onFilterChange, stars } = useContext(AppContext);
 
     return (
         <Paper className="filters">

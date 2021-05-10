@@ -5,6 +5,7 @@ import ModalContainer from "../components/ModalContainer";
 import FiltersContainer from "../components/FiltersContainer";
 import MoviesListContainer from "../components/MoviesListContainer";
 import ActionButtonsContainer from "../components/ActionButtonsContainer";
+import useStarsList from "../hooks/useStarsList";
 import useMovieList from "../hooks/useMoviesList";
 import useAlertState from "../hooks/useAlertState";
 import { Provider } from "../context/appContext";
@@ -14,13 +15,15 @@ function App() {
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [alertValue, setAlertValue] = useAlertState('');
+    const [stars, updateStars] = useStarsList();
 
     const contextValues = {
         movies, reloadMovies,
         activeFilters, onFilterChange,
         isDeleteVisible, setIsDeleteVisible,
         alertValue, setAlertValue,
-        isModalOpen, setIsModalOpen
+        isModalOpen, setIsModalOpen,
+        stars, updateStars
     };
 
     return (

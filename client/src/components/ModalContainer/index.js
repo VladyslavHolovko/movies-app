@@ -15,7 +15,7 @@ import MOVIE_FORMAT_TYPES from "../../constants/movieFormatTypes";
 
 
 const ModalContainer = () => {
-    const { setAlertValue, reloadMovies, isModalOpen, setIsModalOpen } = useContext(AppContext);
+    const { setAlertValue, reloadMovies, isModalOpen, setIsModalOpen, updateStars } = useContext(AppContext);
 
     const [isMovieDataChanged, setIsMovieDataChanged] = useState(false);
     const [newMovieData, setNewMovieData] = useState(EMPTY_MOVIE_DATA);
@@ -49,6 +49,7 @@ const ModalContainer = () => {
                 setAlertValue(ALERT_VALUES.ADD.SUCCESS);
 
                 reloadMovies();
+                updateStars();
                 closeModal();
                 return;
             }

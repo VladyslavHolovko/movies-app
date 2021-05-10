@@ -5,10 +5,14 @@ const useStarsList = () => {
     const [stars, setStars] = useState([]);
 
     useEffect(() => {
-        getStarsList().then(setStars);
+        updateStars();
     }, []);
 
-    return [ stars ];
+    const updateStars = () => {
+        getStarsList().then(setStars);
+    }
+
+    return [ stars, updateStars ];
 }
 
 export default useStarsList;
