@@ -1,4 +1,11 @@
 /.idea/
 
+#server
 /server/node_modules/
 /server/.env
+
+#client
+/client/node_modules
+/client/coverage
+/client/build
+/client/.env

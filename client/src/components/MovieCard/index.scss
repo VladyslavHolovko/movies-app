@@ -1,0 +1,62 @@
+.movie-card {
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1) !important;
+  }
+
+  &._show-delete:hover {
+    transform: scale(1) !important;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    font-size: smaller;
+  }
+
+  &__title {
+    display: block;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  &__footer {
+    margin-top: 1rem;
+    width: clamp(100px, 50%, 280px);
+    align-self: flex-end;
+
+    font-size: 0.7rem;
+    font-style: italic;
+    text-align: right;
+
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+
+  &__star {
+    width: max-content;
+    margin: 0;
+  }
+
+  &__delete-button.MuiButtonBase-root {
+    position: absolute;
+    width: max-content;
+    top: 2.5rem;
+    right: 0.5rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: indianred;
+    }
+  }
+}

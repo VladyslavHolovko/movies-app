@@ -1,0 +1,35 @@
+.action-buttons {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__button.MuiButtonBase-root {
+    display: block;
+
+    &._add {
+      background-color: mediumseagreen;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: seagreen;
+      }
+    }
+
+    &._delete {
+      background-color: indianred;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: darkred;
+      }
+    }
+  }
+
+  &__button-icon {
+    color: white;
+  }
+}
