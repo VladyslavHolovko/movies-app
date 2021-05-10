@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 const FilterByStar = ({ options, value, onChange }) => {
     return (
         <FormControl className="filter-by-star">
-            <InputLabel className="filter-by-star__helper-label">Select star:</InputLabel>
+            <InputLabel className="filter-by-star__helper-label">Search by star</InputLabel>
             <Select
                 value={value}
                 onChange={onChange}
