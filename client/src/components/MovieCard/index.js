@@ -32,7 +32,7 @@ const MovieCard = ({ movie, showDeleteButton, onDelete }) => {
                     }
                     <div className="movie-card__footer">
                         {movie.stars.map((star, i) => (
-                            <p className="movie-card__star">
+                            <p className="movie-card__star" key={i}>
                                 {star}
                                 {(i !== movie.stars.length - 1) && ','}
                             </p>

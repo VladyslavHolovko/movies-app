@@ -25,6 +25,16 @@ const AlertContainer = () => {
                     severity: 'success',
                     message: 'Movie was deleted successfully!'
                 }
+            case ALERT_VALUES.UPLOADING_FILE.SUCCESS:
+                return {
+                    severity: 'success',
+                    message: 'File was successfully upload!'
+                }
+            case ALERT_VALUES.UPLOADING_FILE.FAILED:
+                return {
+                    severity: 'error',
+                    message: `Can not upload this file`
+                }
             default:
                 return {
                     severity: '',
@@ -35,7 +45,7 @@ const AlertContainer = () => {
 
     return (
         <Snackbar
-            open={alertValue}
+            open={!!alertValue}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
             <MuiAlert

@@ -16,21 +16,36 @@ exports.movies_list_get = (req, res) => {
     }
 
     Movie.find(query).sort('title')
-        .then(movies => res.send(movies))
+        .then(movies => res.status(200).send(movies))
         .catch(err => res.send(err));
 };
 
 exports.movies_create_post = (req, res) => {
     Movie.create(req.body)
-        .then(movie => res.send(movie))
+        .then(movie => res.status(200).send(movie))
         .catch(err => res.status(400).send(err.message));
+};
+
+exports.movies_upload_post = (req, res) => {
+    const resBody = [];
+
+    try {
+        req.body.forEach(movie => {
+            Movie.create(movie)
+                .then(() => resBody.push(movie));
+        })
+    } catch (e) {
+        res.status(400).send(e.message)
+    }
+
+    res.send(resBody);
 };
 
 exports.movies_one_delete = (req, res) => {
     Movie.deleteOne({ _id: req.params.movieId })
         .then(dbRes => {
             if (dbRes.deletedCount) {
-                res.send('Movie was successfully deleted');
+                res.status(200).send('Movie was successfully deleted');
             } else {
                 res.status(404).send('Movie was not found');
             }

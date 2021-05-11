@@ -1,0 +1,15 @@
+.file-uploader {
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__example-header {
+    margin-bottom: 0;
+    font-size: smaller;
+  }
+
+  &__example {
+    font-size: x-small;
+    margin-top: 0.5rem;
+  }
+}

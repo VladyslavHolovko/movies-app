@@ -5,6 +5,10 @@ const ALERT_VALUES = {
     },
     DELETE: {
         SUCCESS: 'ALERT#DELETE_SUCCESS'
+    },
+    UPLOADING_FILE: {
+        SUCCESS: 'ALERT#UPLOAD_FILE_SUCCESS',
+        FAILED: 'ALERT#UPLOAD_FILE_FAILED'
     }
 };
 

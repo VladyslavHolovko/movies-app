@@ -1,5 +1,6 @@
 import './index.scss';
 import React, { useContext, useEffect, useState } from 'react';
+import FileUploaderContainer from "../FileUploaderContainer";
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import Paper from "@material-ui/core/Paper";
@@ -26,7 +27,7 @@ const ModalContainer = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
-    }
+    };
 
     const handleInputChange = fieldName => e => {
         setIsMovieDataChanged(true);
@@ -41,7 +42,7 @@ const ModalContainer = () => {
             ...data,
             [fieldName]: value
         }))
-    }
+    };
 
     const handleSaveButtonClick = () => {
         postNewMovie(newMovieData).then(res => {
@@ -57,7 +58,7 @@ const ModalContainer = () => {
             setIsMovieDataChanged(false);
             setAlertValue(ALERT_VALUES.ADD.FAILED);
         })
-    }
+    };
 
     return (
         <Modal
@@ -119,6 +120,7 @@ const ModalContainer = () => {
                     >
                         Save
                     </Button>
+                    <FileUploaderContainer/>
                 </Paper>
             </Fade>
         </Modal>
