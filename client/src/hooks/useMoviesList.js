@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { getMoviesList } from "../requests/movies";
 
-const useMovieList = () => {
+const useMovieList = activeFilters => {
     const [movies, setMovies] = useState([]);
-    const [activeFilters, setActiveFilters] = useState({
-        stars: 0,
-        title: ''
-    });
 
     useEffect(() => {
         loadMovies();
-    }, [activeFilters.stars, activeFilters.title]);
+    }, [activeFilters]);
 
     const loadMovies = () => {
         const queryParams = [];
@@ -24,14 +20,7 @@ const useMovieList = () => {
         getMoviesList(queryParams).then(setMovies);
     }
 
-    const onFilterChange = filterName => event => {
-        setActiveFilters(state => ({
-            ...state,
-            [filterName]: event.target.value
-        }))
-    }
-
-    return { movies, activeFilters, onFilterChange, reloadMovies: loadMovies };
+    return [ movies, loadMovies ];
 }
 
 export default useMovieList;
