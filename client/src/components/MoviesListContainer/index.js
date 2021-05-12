@@ -7,7 +7,7 @@ import AppContext from "../../context/appContext";
 import ALERT_VALUES from "../../constants/alertValues";
 
 const MoviesListContainer = () => {
-    const { movies, isDeleteVisible, reloadMovies, setAlertValue } = useContext(AppContext);
+    const { movies, isDeleteVisible, reloadMovies, setAlertValue, activeFilters } = useContext(AppContext);
 
     const onDelete = (movieId) => () => {
         deleteMovie(movieId).then(res => {
@@ -16,7 +16,7 @@ const MoviesListContainer = () => {
                 reloadMovies();
             }
         });
-    }
+    };
 
     return (
         <ResponsiveMasonry>
@@ -32,6 +32,12 @@ const MoviesListContainer = () => {
                         onDelete={onDelete(movie._id)}
                     />
                 ))}
+                {!movies.length && activeFilters.title && (
+                    <p>There is no movies with this title...</p>
+                )}
+                {!movies.length && !activeFilters.title && (
+                    <p>Loading movies...</p>
+                )}
             </Masonry>
         </ResponsiveMasonry>
     );
