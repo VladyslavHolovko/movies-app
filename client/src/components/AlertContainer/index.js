@@ -18,7 +18,7 @@ const AlertContainer = () => {
             case ALERT_VALUES.ADD.FAILED:
                 return {
                     severity: 'error',
-                    message: 'Invalid movie information. All fields are required.'
+                    message: 'Invalid movie information.'
                 }
             case ALERT_VALUES.DELETE.SUCCESS:
                 return {
@@ -33,7 +33,7 @@ const AlertContainer = () => {
             case ALERT_VALUES.UPLOADING_FILE.FAILED:
                 return {
                     severity: 'error',
-                    message: `Can not upload this file`
+                    message: `Can not find correct movie data in this file.`
                 }
             default:
                 return {

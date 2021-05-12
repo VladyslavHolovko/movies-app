@@ -27,6 +27,11 @@ const FileUploaderContainer = () => {
     };
 
     const handleFileUpload = () => {
+        if (!parsedMovies.length) {
+            setAlertValue(ALERT_VALUES.UPLOADING_FILE.FAILED);
+            return;
+        }
+
         uploadNewMovies(parsedMovies)
             .then((res) => {
                 if (res.status === 200) {

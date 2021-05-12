@@ -26,19 +26,12 @@ exports.movies_create_post = (req, res) => {
         .catch(err => res.status(400).send(err.message));
 };
 
-exports.movies_upload_post = (req, res) => {
-    const resBody = [];
+exports.movies_upload_post = async (req, res) => {
+    const promises = req.body.map(movie => Movie.create(movie));
 
-    try {
-        req.body.forEach(movie => {
-            Movie.create(movie)
-                .then(() => resBody.push(movie));
-        })
-    } catch (e) {
-        res.status(400).send(e.message)
-    }
-
-    res.send(resBody);
+    await Promise.all(promises)
+        .then(movies => res.status(200).send(movies))
+        .catch(err => res.status(400).send(err.message));
 };
 
 exports.movies_one_delete = (req, res) => {
