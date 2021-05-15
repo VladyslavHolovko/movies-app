@@ -10,7 +10,7 @@ exports.movies_list_get = (req, res) => {
         })
     }
 
-    Movie.find(query).sort('title')
+    Movie.find(query).collation({ locale: "en" }).sort('title')
         .then(movies => res.status(200).send(movies))
         .catch(err => res.send(err));
 };
