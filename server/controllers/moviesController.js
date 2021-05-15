@@ -26,14 +26,6 @@ exports.movies_create_post = (req, res) => {
         .catch(err => res.status(400).send(err.message));
 };
 
-exports.movies_upload_post = async (req, res) => {
-    const promises = req.body.map(movie => Movie.create(movie));
-
-    await Promise.all(promises)
-        .then(movies => res.status(200).send(movies))
-        .catch(err => res.status(400).send(err.message));
-};
-
 exports.movies_one_delete = (req, res) => {
     Movie.deleteOne({ _id: req.params.movieId })
         .then(dbRes => {

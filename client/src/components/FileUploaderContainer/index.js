@@ -1,6 +1,6 @@
 import './index.scss';
 import React, { useContext, useState } from 'react';
-import { uploadNewMovies } from "../../requests/movies";
+import { postNewMovie } from "../../requests/movies";
 import parseMoviesFromFile from "../../utils/parseMoviesFromFile";
 import AppContext from "../../context/appContext";
 import ALERT_VALUES from "../../constants/alertValues";
@@ -32,7 +32,7 @@ const FileUploaderContainer = () => {
             return;
         }
 
-        uploadNewMovies(parsedMovies)
+        postNewMovie(parsedMovies)
             .then((res) => {
                 if (res.status === 200) {
                     setIsModalOpen(false);

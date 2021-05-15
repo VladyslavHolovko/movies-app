@@ -26,15 +26,3 @@ export const postNewMovie = async (movieData) => {
         body: JSON.stringify(movieData)
     });
 };
-
-export const uploadNewMovies = async (movies) => {
-    const url = `${API_URL}/movies/upload`;
-
-    return await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(movies)
-    });
-};
