@@ -1,14 +1,33 @@
 const ALERT_VALUES = {
     ADD: {
-        SUCCESS: 'ALERT#ADD_SUCCESS',
-        FAILED: 'ALERT#ADD_FAILED'
+        SUCCESS: {
+            severity: 'success',
+            message: 'Movie was added successfully!'
+        },
+        FAILED: {
+            severity: 'error',
+            message: 'Invalid movie information.'
+        }
     },
     DELETE: {
-        SUCCESS: 'ALERT#DELETE_SUCCESS'
+        SUCCESS: {
+            severity: 'success',
+            message: 'Movie was deleted successfully!'
+        }
     },
     UPLOADING_FILE: {
-        SUCCESS: 'ALERT#UPLOAD_FILE_SUCCESS',
-        FAILED: 'ALERT#UPLOAD_FILE_FAILED'
+        SUCCESS: {
+            severity: 'success',
+            message: 'File was successfully upload!'
+        },
+        WRONG_FILE: {
+            severity: 'error',
+            message: `Can not find correct movie data in this file.`
+        },
+        FAILED: {
+            severity: 'error',
+            message: `File containing movies that is already in the list.`
+        }
     }
 };
 

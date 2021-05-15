@@ -8,7 +8,6 @@ import ActionButtonsContainer from "../components/ActionButtonsContainer";
 import useFilters from "../hooks/useFilters";
 import useStarsList from "../hooks/useStarsList";
 import useMovieList from "../hooks/useMoviesList";
-import useAlertState from "../hooks/useAlertState";
 import { Provider } from "../context/appContext";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
 
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [alertValue, setAlertValue] = useAlertState('');
+    const [alertValue, setAlertValue] = useState({ severity: 'warning', message: '' });
 
     const contextValues = {
         movies, reloadMovies,

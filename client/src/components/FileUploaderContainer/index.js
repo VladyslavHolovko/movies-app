@@ -14,24 +14,20 @@ const FileUploaderContainer = () => {
         const fr = new FileReader();
 
         fr.onload = () => {
-            try {
-                const movies = parseMoviesFromFile(fr.result)
+            const movies = parseMoviesFromFile(fr.result);
 
-                setParsedMovies(movies);
-            } catch (e) {
-                console.error(e);
+            if (!movies.isValid) {
+                setAlertValue(ALERT_VALUES.UPLOADING_FILE.WRONG_FILE);
+                return;
             }
+
+            setParsedMovies(movies.data);
         }
 
         fr.readAsText(e.target.files[0])
     };
 
-    const handleFileUpload = () => {
-        if (!parsedMovies.length) {
-            setAlertValue(ALERT_VALUES.UPLOADING_FILE.FAILED);
-            return;
-        }
-
+    const handleUploadClick = () => {
         postNewMovie(parsedMovies)
             .then((res) => {
                 if (res.status === 200) {
@@ -52,8 +48,14 @@ const FileUploaderContainer = () => {
                 Or you can upload a file with movies data:
             </h5>
             <div>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleFileUpload}>
+                <input
+                    type="file"
+                    onChange={handleFileChange}
+                />
+                <button
+                    onClick={handleUploadClick}
+                    disabled={!parsedMovies}
+                >
                     Upload
                 </button>
             </div>

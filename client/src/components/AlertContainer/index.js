@@ -3,57 +3,31 @@ import React, { useContext } from 'react';
 import MuiAlert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import AppContext from "../../context/appContext";
-import ALERT_VALUES from "../../constants/alertValues";
 
 const AlertContainer = () => {
-    const { alertValue } = useContext(AppContext);
+    const { alertValue, setAlertValue } = useContext(AppContext);
 
-    const alertData = (() => {
-        switch (alertValue) {
-            case ALERT_VALUES.ADD.SUCCESS:
-                return {
-                    severity: 'success',
-                    message: 'Movie was added successfully!'
-                }
-            case ALERT_VALUES.ADD.FAILED:
-                return {
-                    severity: 'error',
-                    message: 'Invalid movie information.'
-                }
-            case ALERT_VALUES.DELETE.SUCCESS:
-                return {
-                    severity: 'success',
-                    message: 'Movie was deleted successfully!'
-                }
-            case ALERT_VALUES.UPLOADING_FILE.SUCCESS:
-                return {
-                    severity: 'success',
-                    message: 'File was successfully upload!'
-                }
-            case ALERT_VALUES.UPLOADING_FILE.FAILED:
-                return {
-                    severity: 'error',
-                    message: `Can not find correct movie data in this file.`
-                }
-            default:
-                return {
-                    severity: '',
-                    message: ''
-                }
-        }
-    })();
+    const handleAlertClose = () => {
+        setAlertValue(alertValue => ({
+            ...alertValue,
+            message: ''
+        }));
+    }
 
     return (
         <Snackbar
-            open={!!alertValue}
+            open={!!alertValue.message}
+            autoHideDuration={3000}
+            key={alertValue.message}
+            onClose={handleAlertClose}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
             <MuiAlert
                 elevation={6}
                 variant="filled"
-                severity={alertData.severity}
+                severity={alertValue.severity}
             >
-                {alertData.message}
+                {alertValue.message}
             </MuiAlert>
         </Snackbar>
     );
