@@ -1,18 +1,13 @@
 const Movie = require('../models/movie');
+const checkIsMovieDuplicated = require('../helpers/checkIsMovieDuplicated');
 
 exports.movies_list_get = (req, res) => {
-    let query;
+    const query = {};
 
     if (req.query) {
-        query = {};
-
-        if (req.query.title) {
-            query.title = new RegExp(req.query.title, 'gi');
-        }
-
-        if (req.query.stars) {
-            query.stars = new RegExp(req.query.stars, 'gi');
-        }
+        Object.keys(req.query).forEach(key => {
+            query[key] = new RegExp(req.query[key], 'gi');
+        })
     }
 
     Movie.find(query).sort('title')
@@ -21,7 +16,19 @@ exports.movies_list_get = (req, res) => {
 };
 
 exports.movies_create_post = (req, res) => {
-    Movie.create(req.body)
+    if (Array.isArray(req.body)) {
+        const promises = req.body.map(movie => checkIsMovieDuplicated(movie));
+
+        Promise.all(promises)
+            .then(() => Movie.create(req.body))
+            .then(movies => res.status(200).send(movies))
+            .catch(err => res.status(400).send(err.message));
+
+        return;
+    }
+
+    checkIsMovieDuplicated(req.body)
+        .then(() => Movie.create(req.body))
         .then(movie => res.status(200).send(movie))
         .catch(err => res.status(400).send(err.message));
 };
@@ -35,5 +42,5 @@ exports.movies_one_delete = (req, res) => {
                 res.status(404).send('Movie was not found');
             }
         })
-        .catch(err => res.send(err));
+        .catch(err => res.status(400).send(err));
 };
