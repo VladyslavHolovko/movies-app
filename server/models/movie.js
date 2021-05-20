@@ -5,7 +5,7 @@ const MovieSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator: title => !!title,
+            validator: title => title.replace(/\W/g, '').length,
             message: "Title is not valid"
         }
     },
@@ -26,7 +26,7 @@ const MovieSchema = new mongoose.Schema({
         type: [String],
         required: true,
         validate: {
-            validator: stars => stars.length && stars.every(star => /^[a-z-\s]+$/gi.test(star)),
+            validator: stars => stars.length && stars.every(star => /^[a-z-\s]+$/gi.test(star) && star.replace(/\W/g, '').length),
             message: "Stars is not valid"
         }
     }
