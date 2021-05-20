@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getMoviesList } from "../requests/movies";
 
 const useMovieList = activeFilters => {
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(false);
 
     useEffect(() => {
         loadMovies();

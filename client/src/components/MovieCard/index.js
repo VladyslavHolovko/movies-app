@@ -14,7 +14,7 @@ const theme = unstable_createMuiStrictModeTheme();
 const MovieCard = ({ movie, showDeleteButton, onDelete }) => {
     return (
         <ThemeProvider theme={theme}>
-            <Grow in={true} timeout={400}>
+            <Grow in={true} timeout={200}>
                 <Card className={`movie-card ${showDeleteButton && '_show-delete'}`}>
                     <CardContent className="movie-card__content">
                         <div className="movie-card__header">

@@ -1,7 +1,8 @@
 import './index.scss';
 import React, { useContext } from 'react';
-import MovieCard from "../MovieCard";
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import MovieCard from "../MovieCard";
+import Grow from "@material-ui/core/Grow";
 import { deleteMovie } from "../../requests/movies";
 import AppContext from "../../context/appContext";
 import ALERT_VALUES from "../../constants/alertValues";
@@ -21,10 +22,10 @@ const MoviesListContainer = () => {
     return (
         <ResponsiveMasonry>
             <Masonry
-                className="movies-list"
+                className="movies-list movies-list__container"
                 gutter="1rem"
             >
-                {movies.map(movie => (
+                {movies && movies.map(movie => (
                     <MovieCard
                         key={movie._id}
                         movie={movie}
@@ -32,12 +33,19 @@ const MoviesListContainer = () => {
                         onDelete={onDelete(movie._id)}
                     />
                 ))}
-                {!movies.length && activeFilters.title && (
-                    <p>There is no movies with this title...</p>
-                )}
-                {!movies.length && !activeFilters.title && (
-                    <p>Loading movies...</p>
-                )}
+                <Grow in={true} timeout={600}>
+                    <p className="movies-list__message">
+                        {movies && !movies.length && activeFilters.title && (
+                            "There is no movies with this title..."
+                        )}
+                        {movies && !movies.length && !activeFilters.title && (
+                            'Movie list is empty now. Try to add one :)'
+                        )}
+                        {!movies && (
+                            "Loading movies..."
+                        )}
+                    </p>
+                </Grow>
             </Masonry>
         </ResponsiveMasonry>
     );
